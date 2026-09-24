@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { profile } from '@/data/profile';
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2, GraduationCap, Award, Globe } from 'lucide-react';
 
 interface ExperienceTimelineProps {
   locale: 'pt-BR' | 'en';
@@ -48,7 +48,7 @@ export async function ExperienceTimeline({ locale }: ExperienceTimelineProps) {
                     <h3 className="font-mono text-lg font-bold text-[var(--foreground)]">
                       {item.role[locale]}
                     </h3>
-                    <p className="text-sm font-medium text-[var(--primary)]">
+                    <p className="text-sm font-semibold text-[var(--primary)]">
                       {item.company}
                     </p>
                   </div>
@@ -98,6 +98,55 @@ export async function ExperienceTimeline({ locale }: ExperienceTimelineProps) {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Education, Certifications & Languages Card */}
+        <div className="mt-16 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8 shadow-xs">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Degree */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[var(--primary)] uppercase tracking-wider">
+                <GraduationCap className="h-4 w-4" />
+                <span>Formação Acadêmica</span>
+              </div>
+              <p className="font-mono text-sm font-bold text-[var(--foreground)]">
+                {profile.education.degree[locale]}
+              </p>
+              <p className="text-xs text-[var(--on-surface-variant)]">
+                {profile.education.institution}
+              </p>
+            </div>
+
+            {/* Certifications */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[var(--primary)] uppercase tracking-wider">
+                <Award className="h-4 w-4" />
+                <span>Certificações</span>
+              </div>
+              {profile.education.certifications.map((cert) => (
+                <div key={cert} className="rounded-lg bg-[var(--surface-container-low)] border border-[var(--border)] p-2.5">
+                  <p className="font-mono text-xs font-bold text-[var(--foreground)]">
+                    {cert}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Languages */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[var(--primary)] uppercase tracking-wider">
+                <Globe className="h-4 w-4" />
+                <span>Idiomas</span>
+              </div>
+              <div className="space-y-1.5">
+                {profile.education.languages.map((lang) => (
+                  <p key={lang} className="font-mono text-xs text-[var(--on-surface-variant)]">
+                    • {lang}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
