@@ -136,4 +136,3 @@ Itens que você pode personalizar conforme sua preferência:
 3. **Bio e Disponibilidade:** Revise as frases em `src/data/profile.ts` (`shortBio`, `availability`, `location`).
 4. **Skills:** Revise as competências listadas em `profile.ts` (`skills`) para adicionar ou marcar como destaque apenas o que desejar evidenciar.
 5. **Redes Opcionais:** Caso queira exibir WhatsApp, link de desenvolvedor da Google Play Console ou Medium, basta preencher os campos opcionais em `profile.social`.
-# My-Android-Portfolio
