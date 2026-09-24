@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "projects": "Projetos",
+    "skills": "Stack",
+    "experience": "Experiência",
+    "contact": "Contato",
+    "resume": "Currículo",
+    "downloadResume": "Baixar currículo"
+  },
+  "hero": {
+    "badge": "Senior Android Engineer",
+    "viewProjects": "Ver projetos",
+    "contactMe": "Contato",
+    "codePreviewTitle": "Compose UI & Clean Domain",
+    "interactiveTab": "Preview do App",
+    "codeTab": "Código Kotlin",
+    "availabilityBadge": "Disponível para contratação"
+  },
+  "projects": {
+    "title": "Projetos em Destaque",
+    "subtitle": "Aplicações nativas com código público no GitHub, arquitetura em camadas e padrões modernos.",
+    "viewCode": "GitHub",
+    "caseStudy": "Estudo de Caso",
+    "playStore": "Google Play",
+    "stars": "estrelas",
+    "lastUpdate": "Atualizado em",
+    "empty": "Nenhum repositório encontrado no momento.",
+    "featuredBadge": "Android Nativo"
+  },
+  "caseStudy": {
+    "backToHome": "← Voltar ao portfólio",
+    "problemContext": "Contexto & Problema",
+    "architecture": "Arquitetura & Camadas",
+    "decisions": "Decisões Técnicas & Trade-offs",
+    "codeDeepDive": "Destaque de Código Kotlin",
+    "screenshots": "Interface & Galeria de Telas",
+    "viewReleases": "Baixar APK / Releases",
+    "viewRepo": "Repositório no GitHub",
+    "alternative": "Alternativa descartada",
+    "chosen": "Abordagem adotada",
+    "why": "Motivação técnica",
+    "noScreenshots": "Nenhuma captura disponível para este projeto."
+  },
+  "skills": {
+    "title": "Stack & Competências",
+    "subtitle": "Tecnologias e metodologias aplicadas em produção no ecossistema Android nativo."
+  },
+  "experience": {
+    "title": "Trajetória & Impacto",
+    "subtitle": "Histórico profissional focado em arquitetura resiliente, performance e entregas de valor.",
+    "present": "Presente"
+  },
+  "contact": {
+    "title": "Contato & Oportunidades",
+    "subtitle": "Pronto para impulsionar a engenharia Android do seu time com código limpo e arquitetura sólida.",
+    "emailButton": "Conversar por E-mail",
+    "subjectPrefilled": "Oportunidade Senior Android Engineer - Samuel Baldasso",
+    "emailCopied": "E-mail copiado!",
+    "copyEmail": "Copiar e-mail",
+    "socialProfiles": "Perfis profissionais"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "builtWith": "Construído com Next.js (App Router), Tailwind CSS e Shiki."
+  }
+}

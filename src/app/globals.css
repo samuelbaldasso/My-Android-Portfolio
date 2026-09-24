@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light Mode - Material 3 Tonal Palette */
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    
+    --surface: #ffffff;
+    --surface-container-low: #f1f5f9;
+    --surface-container: #e2e8f0;
+    --surface-container-high: #cbd5e1;
+    --surface-variant: #e2e8f0;
+    --on-surface-variant: #475569;
+    
+    /* Android Green Primary */
+    --primary: #059669;
+    --primary-hover: #047857;
+    --primary-container: #d1fae5;
+    --on-primary: #ffffff;
+    --on-primary-container: #064e3b;
+    
+    /* Secondary & Accent */
+    --secondary: #0284c7;
+    --secondary-container: #e0f2fe;
+    --on-secondary: #ffffff;
+    --on-secondary-container: #0c4a6e;
+
+    /* Border & Outline */
+    --border: #e2e8f0;
+    --outline: #94a3b8;
+    --outline-variant: #cbd5e1;
+    
+    /* Focus & Ring */
+    --ring: #059669;
+    
+    /* Code block colors */
+    --code-bg: #0f172a;
+    --code-fg: #f8fafc;
+  }
+
+  .dark {
+    /* Dark Mode (Default) - Material 3 Dark Surface Palette */
+    --background: #090d16;
+    --foreground: #f1f5f9;
+    
+    --surface: #0f172a;
+    --surface-container-low: #131b2e;
+    --surface-container: #1a233a;
+    --surface-container-high: #242f4d;
+    --surface-variant: #1e293b;
+    --on-surface-variant: #94a3b8;
+    
+    /* Android Green Vivid Primary */
+    --primary: #3ddc84;
+    --primary-hover: #32c473;
+    --primary-container: #064e3b;
+    --on-primary: #022c22;
+    --on-primary-container: #a7f3d0;
+    
+    /* Secondary & Accent */
+    --secondary: #38bdf8;
+    --secondary-container: #0c4a6e;
+    --on-secondary: #082f49;
+    --on-secondary-container: #bae6fd;
+
+    /* Border & Outline */
+    --border: #1e293b;
+    --outline: #475569;
+    --outline-variant: #334155;
+    
+    /* Focus & Ring */
+    --ring: #3ddc84;
+    
+    /* Code block colors */
+    --code-bg: #030712;
+    --code-fg: #f3f4f6;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible focus ring across all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth scrolling when motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
 }
