@@ -163,12 +163,14 @@ describe('Data Layer & GitHub Utilities', () => {
   it('validates fallback pinned items contain real non-invented repositories', () => {
     const names = fallbackPinnedRepositories.map((r) => r.name);
     expect(names).toContain('Finance-Flow-App');
+    expect(names).toContain('Eat.me');
     expect(names).toContain('The-Movie-DB-App');
     expect(names).toContain('Java-Banking-Core');
     expect(names).toContain('Java-Subscription-B2C-Service');
 
     // Kotlin/Android repos must be ordered first
     expect(fallbackPinnedRepositories[0].name).toBe('Finance-Flow-App');
-    expect(fallbackPinnedRepositories[1].name).toBe('The-Movie-DB-App');
+    expect(fallbackPinnedRepositories[1].name).toBe('Eat.me');
+    expect(fallbackPinnedRepositories[2].name).toBe('The-Movie-DB-App');
   });
 });

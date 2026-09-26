@@ -36,10 +36,13 @@ describe('Project Case Study Routing & Resolution', () => {
 
     // These MUST match the middleware so next-intl can handle i18n routing
     expect(pattern.test('/projects/finance-flow-app')).toBe(true);
+    expect(pattern.test('/projects/eat-me')).toBe(true);
     expect(pattern.test('/projects/the-movie-db-app')).toBe(true);
     expect(pattern.test('/projects/java-banking-core')).toBe(true);
     expect(pattern.test('/projects/java-subscription-b2c-service')).toBe(true);
     expect(pattern.test('/pt-BR/projects/finance-flow-app')).toBe(true);
+    expect(pattern.test('/pt-BR/projects/eat-me')).toBe(true);
+    expect(pattern.test('/en/projects/eat-me')).toBe(true);
     expect(pattern.test('/en/projects/finance-flow-app')).toBe(true);
     expect(pattern.test('/')).toBe(true);
 

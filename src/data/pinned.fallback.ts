@@ -159,6 +159,172 @@ class CreateInstallmentPurchaseUseCase @Inject constructor(
     },
   },
   {
+    name: 'Eat.me',
+    slug: 'eat-me',
+    title: 'Eat.me · Delivery Platform',
+    description:
+      'Clone conceitual e produção-grade do ecossistema de delivery (estilo iFood) para Android nativo em Kotlin e Jetpack Compose, concebido com arquitetura de alta escala, modularização e princípios rigorosos de Clean Architecture e UDF/MVI.',
+    url: 'https://github.com/samuelbaldasso/Eat.me',
+    homepageUrl: null,
+    stargazerCount: 0,
+    forkCount: 0,
+    primaryLanguage: {
+      name: 'Kotlin',
+      color: '#A97BFF',
+    },
+    repositoryTopics: [
+      'android',
+      'kotlin',
+      'jetpack-compose',
+      'clean-architecture',
+      'mvi',
+      'multi-module',
+      'dagger-hilt',
+      'material3',
+      'offline-first',
+      'value-class',
+    ],
+    pushedAt: '2026-09-26T19:14:41Z',
+    isAndroid: true,
+    releasesUrl: 'https://github.com/samuelbaldasso/Eat.me/releases',
+    screenshots: [],
+    architectureSummary: {
+      pattern: 'Clean Architecture + MVI/UDF + Modularização Multi-Module',
+      layers: [
+        {
+          name: 'Camada de UI & Apresentação (Compose)',
+          description:
+            'Stateless Composables, State Hoisting, Material 3, Navigation Compose Type-Safe e HomeViewModel com StateFlow e Hilt.',
+          tech: [
+            'Jetpack Compose',
+            'Material 3',
+            '@HiltViewModel',
+            'StateFlow',
+            'Navigation Compose',
+          ],
+        },
+        {
+          name: 'Camada de Domínio Puro (:core:domain-shared)',
+          description:
+            'Módulo Kotlin JVM puro (zero acoplamento ao Android SDK ou frameworks), entidades de negócio, Value Class Money com cálculos monetários exatos em centavos inteiros (RN-PRICE-01) e tipos funcionais AppResult e AppError.',
+          tech: [
+            'Kotlin JVM puro',
+            'Value Classes (@JvmInline)',
+            'AppResult & AppError',
+            'Zero Android Dependencies',
+          ],
+        },
+        {
+          name: 'Camada de Dados & Integração',
+          description:
+            'Contratos de repositório (RestaurantRepository), injeção com Dagger Hilt, rede com Retrofit/OkHttp e cache local offline-first com Room e DataStore.',
+          tech: [
+            'Dagger Hilt',
+            'Retrofit / OkHttp',
+            'Room Database',
+            'Preferences DataStore',
+          ],
+        },
+      ],
+    },
+    tradeOffs: [
+      {
+        decision: 'Value Class Money em Centavos vs BigDecimal ou Double',
+        chosen: '@JvmInline value class Money(val cents: Long)',
+        alternative: 'BigDecimal ou Double / Float',
+        reason:
+          'Elimina problemas de arredondamento e derivação do IEEE 754 de tipos flutuantes e evita a penalidade de alocação de objetos em heap do BigDecimal durante ciclos de recomposição rápida do Jetpack Compose.',
+      },
+      {
+        decision: 'Módulo :core:domain-shared Puro JVM vs Biblioteca Android',
+        chosen: 'Módulo Kotlin JVM puro desacoplado do Android SDK',
+        alternative: 'Módulo com.android.library padrão',
+        reason:
+          'Permite execução instantânea de testes unitários na JVM sem overhead de Robolectric ou emulador, diminui os tempos de compilação incremental do Gradle e viabiliza interoperabilidade futura com Kotlin Multiplatform (KMP).',
+      },
+      {
+        decision: 'Modelagem de Resultados com Sealed Interface AppResult<T, E>',
+        chosen:
+          'sealed interface AppResult<out T, out E : AppError> com combinadores funcionais (map, fold, onError)',
+        alternative: 'Lançamento de exceções runtime genéricas (try/catch)',
+        reason:
+          'Torna os erros explícitos na tipagem estática e força o tratamento determinístico de casos de falha (rede, validação, regras) em tempo de compilação sem crashes inesperados.',
+      },
+      {
+        decision: 'Injeção de Dependências com Dagger Hilt vs Service Locator',
+        chosen:
+          'Dagger Hilt com geração em tempo de compilação e escopos de ciclo de vida',
+        alternative: 'Koin com reflexão ou Service Locator manual',
+        reason:
+          'Garante verificação estática do grafo de injeção em tempo de compilação com zero custo de reflexão em runtime, mantendo o consumo de memória enxuto.',
+      },
+    ],
+    highlightCode: {
+      title: 'Money.kt (:core:domain-shared)',
+      language: 'kotlin',
+      code: `package com.samuelbaldasso.ifoodclone.core.domain.model
+
+import kotlinx.serialization.Serializable
+import java.math.BigDecimal
+import java.math.RoundingMode
+import java.text.NumberFormat
+import java.util.Locale
+
+/**
+ * Value class representing monetary values in Brazilian Real (BRL) stored in whole cents (Long).
+ * Floating-point types (Double/Float) are strictly forbidden for currency per RN-PRICE-01.
+ */
+@Serializable
+@JvmInline
+value class Money(val cents: Long) : Comparable<Money> {
+
+    val isZero: Boolean get() = cents == 0L
+    val isPositive: Boolean get() = cents > 0L
+    val isNegative: Boolean get() = cents < 0L
+
+    operator fun plus(other: Money): Money = Money(Math.addExact(this.cents, other.cents))
+
+    operator fun minus(other: Money): Money = Money(Math.subtractExact(this.cents, other.cents))
+
+    operator fun times(multiplier: Int): Money = Money(Math.multiplyExact(this.cents, multiplier.toLong()))
+
+    operator fun times(multiplier: Long): Money = Money(Math.multiplyExact(this.cents, multiplier))
+
+    /**
+     * Calculates percentage of money with strict HALF_UP rounding.
+     * e.g., Money(1000).percentage(10) == Money(100)
+     */
+    fun percentage(percent: Int, roundingMode: RoundingMode = RoundingMode.HALF_UP): Money {
+        require(percent in 0..100) { "Percentage must be between 0 and 100, got: $percent" }
+        if (percent == 0 || isZero) return ZERO
+        if (percent == 100) return this
+
+        val calculatedCents = BigDecimal.valueOf(cents)
+            .multiply(BigDecimal.valueOf(percent.toLong()))
+            .divide(BigDecimal.valueOf(100L), 0, roundingMode)
+            .longValueExact()
+
+        return Money(calculatedCents)
+    }
+
+    fun coerceAtLeastZero(): Money = if (cents < 0L) ZERO else this
+
+    override fun compareTo(other: Money): Int = this.cents.compareTo(other.cents)
+
+    fun formatBrl(): String {
+        val format = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
+        return format.format(BigDecimal.valueOf(cents).divide(BigDecimal.valueOf(100L)))
+    }
+
+    companion object {
+        val ZERO = Money(0L)
+        fun fromDouble(amount: Double): Money =
+            Money(BigDecimal.valueOf(amount).multiply(BigDecimal.valueOf(100L)).setScale(0, RoundingMode.HALF_UP).longValueExact())
+    }
+}`,
+    },
+  },
+  {
     name: 'The-Movie-DB-App',
     slug: 'the-movie-db-app',
     title: 'The Movie Database (TMDB) App',
