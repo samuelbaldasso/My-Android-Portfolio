@@ -8,7 +8,7 @@
     "downloadResume": "Download CV"
   },
   "hero": {
-    "badge": "Senior Android Engineer",
+    "badge": "Mid-Level Android Engineer",
     "viewProjects": "View projects",
     "contactMe": "Get in touch",
     "codePreviewTitle": "Compose UI & Clean Domain",
@@ -54,7 +54,7 @@
     "title": "Contact & Opportunities",
     "subtitle": "Ready to scale your Android engineering team with clean code and resilient architecture.",
     "emailButton": "Connect via Email",
-    "subjectPrefilled": "Senior Android Engineer Opportunity - Samuel Baldasso",
+    "subjectPrefilled": "Mid-Level Android Engineer Opportunity - Samuel Baldasso",
     "emailCopied": "Email copied!",
     "copyEmail": "Copy email",
     "socialProfiles": "Professional profiles"

@@ -1,6 +1,6 @@
-# Samuel Baldasso · Senior Android Engineer Portfolio
+# Samuel Baldasso · Mid-Level Android Engineer Portfolio
 
-Portfólio técnico de alto impacto de **Samuel Baldasso**, Senior Android Engineer especializado no ecossistema nativo com **Kotlin**, **Jetpack Compose**, **Clean Architecture** e **Arquitetura Reativa Offline-First**.
+Portfólio técnico de alto impacto de **Samuel Baldasso**, Engenheiro Android Pleno (Mid-Level) especializado no ecossistema nativo com **Kotlin**, **Jetpack Compose**, **Clean Architecture** e **Arquitetura Reativa Offline-First**.
 
 Construído para permitir que um Tech Lead ou recrutador técnico conclua em 30 segundos:
 > *"Sabe arquitetar apps nativos, tem código público de qualidade e é contratável."*

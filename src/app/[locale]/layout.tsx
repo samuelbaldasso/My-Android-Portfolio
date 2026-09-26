@@ -46,7 +46,8 @@ export async function generateMetadata({
       'Kotlin',
       'Jetpack Compose',
       'Clean Architecture',
-      'Senior Android Engineer',
+      'Mid-Level Android Engineer',
+      'Engenheiro Android Pleno',
       'Coroutines',
       'StateFlow',
       'Dagger Hilt',
@@ -120,7 +121,7 @@ export default async function LocaleLayout({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.fullName,
-    jobTitle: 'Senior Android Engineer',
+    jobTitle: typedLocale === 'pt-BR' ? 'Engenheiro Android Pleno' : 'Mid-Level Android Engineer',
     url: 'https://samuelbaldasso.dev',
     email: `mailto:${profile.email}`,
     address: {

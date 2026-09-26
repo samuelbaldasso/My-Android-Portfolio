@@ -46,7 +46,7 @@ export async function SkillsSection({ locale }: SkillsSectionProps) {
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
           <div className="inline-flex items-center gap-2 rounded-md bg-[var(--primary-container)] px-3 py-1 text-xs font-mono font-medium text-[var(--on-primary-container)]">
             <Cpu className="h-3.5 w-3.5 text-[var(--primary)]" />
-            <span>Senior Android Core Competencies</span>
+            <span>Android Core Competencies</span>
           </div>
 
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[var(--foreground)] sm:text-4xl">

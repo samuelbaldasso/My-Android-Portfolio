@@ -61,8 +61,8 @@ export interface ProfileData {
 export const profile: ProfileData = {
   fullName: 'Samuel Baldasso',
   headline: {
-    'pt-BR': 'Senior Android Engineer · Kotlin · Jetpack Compose',
-    en: 'Senior Android Engineer · Kotlin · Jetpack Compose',
+    'pt-BR': 'Engenheiro Android Pleno · Kotlin · Jetpack Compose',
+    en: 'Mid-Level Android Engineer · Kotlin · Jetpack Compose',
   },
   valueProposition: {
     'pt-BR':
