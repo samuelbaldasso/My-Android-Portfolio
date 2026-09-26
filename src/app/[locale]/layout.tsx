@@ -56,6 +56,13 @@ export async function generateMetadata({
     ],
     authors: [{ name: profile.fullName, url: profile.social.github }],
     creator: profile.fullName,
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
+      ],
+      apple: '/icon.svg',
+    },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {

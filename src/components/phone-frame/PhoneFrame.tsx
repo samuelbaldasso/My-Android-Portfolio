@@ -8,7 +8,7 @@ interface PhoneFrameProps {
 }
 
 export function PhoneFrame({
-  imageSrc = '/projects/finance-flow/01_accounts_screen.png',
+  imageSrc = '/screenshots/finance-flow/01_accounts_screen.png',
   imageAlt = 'Android application screen preview',
   className = '',
   priority = false,

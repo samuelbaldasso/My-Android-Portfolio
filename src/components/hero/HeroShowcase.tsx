@@ -61,7 +61,7 @@ export function HeroShowcase({
             className="flex justify-center w-full"
           >
             <PhoneFrame
-              imageSrc="/projects/finance-flow/01_accounts_screen.png"
+              imageSrc="/screenshots/finance-flow/01_accounts_screen.png"
               imageAlt="Tela de Contas do Finance Flow App em Jetpack Compose"
               priority
             />

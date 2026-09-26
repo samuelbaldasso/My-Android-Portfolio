@@ -4,10 +4,8 @@ import { routing } from './i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  // Match all request paths except internal files and public assets
-  matcher: [
-    '/',
-    '/(pt-BR|en)/:path*',
-    '/((?!api|_next|_vercel|resume|projects|.*\\..*).*)',
-  ],
+  // Match all pathnames except for
+  // - … if they start with `/api`, `/_next` or `/_vercel`
+  // - … the ones containing a dot (e.g. `favicon.ico`, `.png`, `.pdf`)
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };

@@ -31,13 +31,13 @@ export const fallbackPinnedRepositories: PinnedRepositoriesList = [
     isAndroid: true,
     releasesUrl: 'https://github.com/samuelbaldasso/Finance-Flow-App/releases',
     screenshots: [
-      '/projects/finance-flow/01_accounts_screen.png',
-      '/projects/finance-flow/02_transactions_screen.png',
-      '/projects/finance-flow/03_budgets_screen.png',
-      '/projects/finance-flow/04_goals_screen.png',
-      '/projects/finance-flow/05_cards_screen.png',
-      '/projects/finance-flow/06_settings_screen.png',
-      '/projects/finance-flow/07_create_account_dialog.png',
+      '/screenshots/finance-flow/01_accounts_screen.png',
+      '/screenshots/finance-flow/02_transactions_screen.png',
+      '/screenshots/finance-flow/03_budgets_screen.png',
+      '/screenshots/finance-flow/04_goals_screen.png',
+      '/screenshots/finance-flow/05_cards_screen.png',
+      '/screenshots/finance-flow/06_settings_screen.png',
+      '/screenshots/finance-flow/07_create_account_dialog.png',
     ],
     architectureSummary: {
       pattern: 'Clean Architecture + DDD + UDF (MVI)',
@@ -188,9 +188,9 @@ class CreateInstallmentPurchaseUseCase @Inject constructor(
     isAndroid: true,
     releasesUrl: 'https://github.com/samuelbaldasso/The-Movie-DB-App/releases',
     screenshots: [
-      '/projects/movie-db/home.png',
-      '/projects/movie-db/details.png',
-      '/projects/movie-db/search.png',
+      '/screenshots/movie-db/home.png',
+      '/screenshots/movie-db/details.png',
+      '/screenshots/movie-db/search.png',
     ],
     architectureSummary: {
       pattern: 'Clean Architecture + MVVM + RemoteMediator (Paging 3)',
