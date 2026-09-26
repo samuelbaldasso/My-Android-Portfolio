@@ -58,10 +58,12 @@ export async function generateMetadata({
     creator: profile.fullName,
     icons: {
       icon: [
-        { url: '/favicon.ico', sizes: 'any' },
         { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' },
       ],
-      apple: '/icon.svg',
+      apple: [
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
@@ -153,6 +155,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
