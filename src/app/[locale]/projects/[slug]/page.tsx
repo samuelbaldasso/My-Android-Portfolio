@@ -318,17 +318,25 @@ export default async function ProjectCaseStudyPage({
 
           {project.screenshots && project.screenshots.length > 0 ? (
             <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {project.screenshots.slice(0, 6).map((src, index) => (
-                <div key={src} className="flex flex-col items-center">
-                  <PhoneFrame
-                    imageSrc={src}
-                    imageAlt={`${project.title} - Tela ${index + 1}`}
-                  />
-                  <span className="mt-3 font-mono text-xs text-[var(--on-surface-variant)]">
-                    Tela #{index + 1}
-                  </span>
-                </div>
-              ))}
+              {project.screenshots.map((src, index) => {
+                const filename = src.split('/').pop()?.replace('.png', '') || '';
+                const cleanName = filename
+                  .replace(/^\d+_/, '')
+                  .replace(/_/g, ' ')
+                  .replace(/\b\w/g, (c) => c.toUpperCase());
+
+                return (
+                  <div key={src} className="flex flex-col items-center">
+                    <PhoneFrame
+                      imageSrc={src}
+                      imageAlt={`${project.title} - ${cleanName || `Tela ${index + 1}`}`}
+                    />
+                    <span className="mt-3 font-mono text-xs text-[var(--on-surface-variant)] text-center">
+                      {String(index + 1).padStart(2, '0')} · {cleanName || `Tela #${index + 1}`}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="mt-6 rounded-2xl border border-dashed border-[var(--border)] p-10 text-center">

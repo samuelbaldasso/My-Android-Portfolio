@@ -51,6 +51,7 @@ describe('Project Case Study Routing & Resolution', () => {
     expect(pattern.test('/icon.svg')).toBe(false);
     expect(pattern.test('/resume/resume-pt.pdf')).toBe(false);
     expect(pattern.test('/screenshots/finance-flow/01_accounts_screen.png')).toBe(false);
+    expect(pattern.test('/screenshots/eat-me/01_home_screen.png')).toBe(false);
     expect(pattern.test('/api/hello')).toBe(false);
     expect(pattern.test('/_next/static/chunks/app.js')).toBe(false);
   });

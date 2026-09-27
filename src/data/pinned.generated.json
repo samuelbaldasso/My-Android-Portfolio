@@ -141,67 +141,93 @@
     "pushedAt": "2026-09-26T19:14:41Z",
     "isAndroid": true,
     "releasesUrl": "https://github.com/samuelbaldasso/Eat.me/releases",
-    "screenshots": [],
+    "screenshots": [
+      "/screenshots/eat-me/01_home_screen.png",
+      "/screenshots/eat-me/02_search_screen.png",
+      "/screenshots/eat-me/03_restaurant_detail.png",
+      "/screenshots/eat-me/04_dish_customization.png",
+      "/screenshots/eat-me/05_cart_screen.png",
+      "/screenshots/eat-me/06_checkout_screen.png",
+      "/screenshots/eat-me/07_order_tracking.png",
+      "/screenshots/eat-me/08_orders_history.png",
+      "/screenshots/eat-me/09_profile_screen.png"
+    ],
     "architectureSummary": {
       "pattern": "Clean Architecture + MVI/UDF + Modularização Multi-Module",
       "layers": [
         {
-          "name": "Camada de UI & Apresentação (Compose)",
-          "description": "Stateless Composables, State Hoisting, Material 3, Navigation Compose Type-Safe e HomeViewModel com StateFlow e Hilt.",
+          "name": "Camada de UI & Apresentação (:app)",
+          "description": "Stateless Composables, State Hoisting, Material 3, Navigation Compose Type-Safe, SplashScreen API nativa com Edge-to-Edge e ViewModels MVI reativos.",
           "tech": [
             "Jetpack Compose",
             "Material 3",
             "@HiltViewModel",
-            "StateFlow",
-            "Navigation Compose"
+            "StateFlow (UDF)",
+            "Navigation Compose",
+            "SplashScreen API"
           ]
         },
         {
-          "name": "Camada de Domínio Puro (:core:domain-shared)",
-          "description": "Módulo Kotlin JVM puro (zero acoplamento ao Android SDK ou frameworks), entidades de negócio, Value Class Money com cálculos monetários exatos em centavos inteiros (RN-PRICE-01) e tipos funcionais AppResult e AppError.",
+          "name": "Design System & Feedback (:core:designsystem)",
+          "description": "Design tokens com paleta roxa vibrante, tipografia escalável, componentes compartilhados e modificadores de Shimmer para skeletons de carregamento.",
+          "tech": [
+            "Compose Design Tokens",
+            "Shimmer Animations",
+            "Reusable Components"
+          ]
+        },
+        {
+          "name": "Domínio Puro (:core:domain-shared)",
+          "description": "Módulo Kotlin JVM puro (zero acoplamento ao Android SDK ou frameworks), entidades (Restaurant, Dish, Cart, Order), Value Class Money (RN-PRICE-01) e AppResult / AppError.",
           "tech": [
             "Kotlin JVM puro",
             "Value Classes (@JvmInline)",
             "AppResult & AppError",
-            "Zero Android Dependencies"
+            "Clean Architecture"
           ]
         },
         {
-          "name": "Camada de Dados & Integração",
-          "description": "Contratos de repositório (RestaurantRepository), injeção com Dagger Hilt, rede com Retrofit/OkHttp e cache local offline-first com Room e DataStore.",
+          "name": "Persistência & Dados (:core:database)",
+          "description": "Room SQLite como Single Source of Truth offline-first, entidades relacionais 1:N com cascata, DAOs reativos com Flow e seeder automático.",
           "tech": [
-            "Dagger Hilt",
-            "Retrofit / OkHttp",
             "Room Database",
-            "Preferences DataStore"
+            "SQLite 1:N Relations",
+            "Reactive Flow",
+            "Dagger Hilt"
           ]
         }
       ]
     },
     "tradeOffs": [
       {
-        "decision": "Value Class Money em Centavos vs BigDecimal ou Double",
+        "decision": "ADR-001: Value Class Money em Centavos vs BigDecimal ou Double",
         "chosen": "@JvmInline value class Money(val cents: Long)",
         "alternative": "BigDecimal ou Double / Float",
         "reason": "Elimina problemas de arredondamento e derivação do IEEE 754 de tipos flutuantes e evita a penalidade de alocação de objetos em heap do BigDecimal durante ciclos de recomposição rápida do Jetpack Compose."
       },
       {
-        "decision": "Módulo :core:domain-shared Puro JVM vs Biblioteca Android",
-        "chosen": "Módulo Kotlin JVM puro desacoplado do Android SDK",
-        "alternative": "Módulo com.android.library padrão",
-        "reason": "Permite execução instantânea de testes unitários na JVM sem overhead de Robolectric ou emulador, diminui os tempos de compilação incremental do Gradle e viabiliza interoperabilidade futura com Kotlin Multiplatform (KMP)."
+        "decision": "ADR-002: Backend Embutido e Persistência via Room SQLite",
+        "chosen": "Room Database com Single Source of Truth offline-first e relações 1:N",
+        "alternative": "Mocks voláteis em memória ou dependência direta de backend REST instável",
+        "reason": "Garante experiência offline fluida, consistência transacional atômica entre carrinho e pedidos, e capacidade de simulação determinística de todo o ciclo de compra."
       },
       {
-        "decision": "Modelagem de Resultados com Sealed Interface AppResult<T, E>",
-        "chosen": "sealed interface AppResult<out T, out E : AppError> com combinadores funcionais (map, fold, onError)",
-        "alternative": "Lançamento de exceções runtime genéricas (try/catch)",
-        "reason": "Torna os erros explícitos na tipagem estática e força o tratamento determinístico de casos de falha (rede, validação, regras) em tempo de compilação sem crashes inesperados."
+        "decision": "ADR-003: Padrão UDF (Unidirectional Data Flow) e MVI na Apresentação",
+        "chosen": "UiState imutável, Intents atômicas do usuário e canais para UiEffect pontuais",
+        "alternative": "Múltiplos LiveDatas/StateFlows independentes e mutações diretas",
+        "reason": "Elimina condições de corrida e estados intermediários inválidos na interface, tornando as transições visuais determinísticas e 100% testáveis com Turbine."
       },
       {
-        "decision": "Injeção de Dependências com Dagger Hilt vs Service Locator",
-        "chosen": "Dagger Hilt com geração em tempo de compilação e escopos de ciclo de vida",
-        "alternative": "Koin com reflexão ou Service Locator manual",
-        "reason": "Garante verificação estática do grafo de injeção em tempo de compilação com zero custo de reflexão em runtime, mantendo o consumo de memória enxuto."
+        "decision": "ADR-004: SplashScreen API Nativa (Android 12+) e Edge-to-Edge",
+        "chosen": "androidx.core:core-splashscreen com animação de saída e enableEdgeToEdge",
+        "alternative": "Activity de Splash customizada legada com Handler.postDelayed",
+        "reason": "Elimina telas brancas ou saltos na inicialização a frio, respeita as diretrizes de design do Android 15 e estende o conteúdo sob as barras de sistema de forma imersiva."
+      },
+      {
+        "decision": "ADR-005: Feedback de Carregamento por Esqueletos Shimmer",
+        "chosen": "Modifier customizado com InfiniteTransition e gradiente linear dinâmico",
+        "alternative": "CircularProgressIndicator centralizado genérico",
+        "reason": "Reduz a percepção do tempo de espera pelo usuário, evita Cumulative Layout Shift (CLS) e espelha o padrão de excelência de UX dos principais apps de delivery."
       }
     ],
     "highlightCode": {
